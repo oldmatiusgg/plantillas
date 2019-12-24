@@ -20,6 +20,7 @@ app = Flask(__name__)
 # * Crear un llave/clave secreta para SESSION
 app.config['SECRET_KEY'] = 'SUPER SECRETO'
 
+
 # **************************************
 # * ULR Conexion
 MONGO_URL_ATLAS = 'mongodb+srv://mongodb:mongodb@cluster0-l6v7e.mongodb.net/test?retryWrites=true&w=majority'
