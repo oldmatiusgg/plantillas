@@ -1,13 +1,13 @@
 from flask import Flask, url_for, session, request, redirect, render_template
-#* Importación Paquete con la clase
+# * Importación Paquete con la clase
 from paquete.Clase import nombreClase
-#*Random
+# *Random
 import random
-#* CSV
+# * CSV
 import csv
 # *Importar MONGO DB
 from pymongo import MongoClient
-#* Libreria Documentación
+# * Libreria Documentación
 import doctest
 
 # *DATOS BASE DE DATOS EN LA NUBE
@@ -36,24 +36,23 @@ db = client['nombre_BD']
 # * Creacion coleccion
 collection = db['nombreCollection']
 
-#* Collecion usuarios, por si necesitas un login
+# * Collecion usuarios, por si necesitas un login
 # collectionUsuarios = db['usuarios']
 
-#*******************************************
+# *******************************************
 
-#* Objeto
+# * Objeto
 # objetoClase = nombreClase()
 
 
-#*******************************************
+# *******************************************
 
 # * Coleccion con la información de la Inmobiliaría
 
 # ******************************************
-#* RUTE REDIRECCIONAR
+# * RUTE REDIRECCIONAR
 @app.route('/')
 def redireccionar():
-
     """
     RUTA REDIRECCIONAR A LA RUTA HOME
     """
@@ -61,10 +60,9 @@ def redireccionar():
     return redirect(url_for('home'))
 
 # ******************************************
-#* RUTE HOMRE
+# * RUTE HOMRE
 @app.route('/home')
 def home():
-
     """
     RUTA HOME
     """
@@ -72,10 +70,10 @@ def home():
     return render_template('home.html')
 
 # ******************************************
-#* Si tienes SESSION, que cuando vuelva a HOME, toda la sección que tengas se borre, en este
-#* caso es con POST, es decir, que según la página en la que estes, el boton para volver a home.html
+# * Si tienes SESSION, que cuando vuelva a HOME, toda la sección que tengas se borre, en este
+# * caso es con POST, es decir, que según la página en la que estes, el boton para volver a home.html
 # #* debe tener un FORM de POST.
-#* Por sí lo necesitas
+# * Por sí lo necesitas
 # @app.route('/home', methods=['GET', 'POST'])
 # def homeDatos():
 
@@ -93,10 +91,10 @@ def home():
 
 #     return render_template('home.html')
 
-#************************************************
+# ************************************************
 
-#* Login por si lo necesitas
-#* Solo le falta la contraseña, simplemente sería agregarsela
+# * Login por si lo necesitas
+# * Solo le falta la contraseña, simplemente sería agregarsela
 # @app.route('/usuario')
 # def usuario():
 
@@ -192,7 +190,189 @@ def home():
 
 # ******************************************
 
-#* Si necesitas más rutas, copia y pega estas dos plantillas de rutas
+# * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
+
+ @app.route('/perfil')
+ def perfil():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+    return render_template('nuevaRuta.html')
+
+
+# ******************************************
+
+
+@app.route('/perfil', methods=['POST'])
+def perfilDatos():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+    return render_template('perfil.html')
+
+# ******************************************
+
+# * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
+
+ @app.route('/reciclar')
+ def reciclar():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+     return render_template('reciclar.html')
+
+
+# ******************************************
+
+
+ @app.route('/reciclar', methods=['POST'])
+ def reciclarDatos():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+ return render_template('reciclar.html')
+
+# ******************************************
+
+# * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
+
+ @app.route('/eventos')
+ def eventos():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+     return render_template('eventos.html')
+
+
+# ******************************************
+
+
+ @app.route('/eventos', methods=['POST'])
+ def eventosDatos():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+ return render_template('eventos.html')
+
+# ******************************************
+
+# * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
+
+ @app.route('/educacion')
+ def educacion():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+     return render_template('educacion.html')
+
+
+# ******************************************
+
+
+ @app.route('/educacion', methods=['POST'])
+ def educacionDatos():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+ return render_template('educacion.html')
+
+# ******************************************
+
+# * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
+
+ @app.route('/crearEvento')
+ def crearEvento():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+     return render_template('crearEvento.html')
+
+
+# ******************************************
+
+
+ @app.route('/crearEvento', methods=['POST'])
+ def crearEventoDatos():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+ return render_template('crearEvento.html')
+
+# ******************************************
+
+# * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
+
+ @app.route('/noticias')
+ def noticias():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+     return render_template('noticias.html')
+
+
+# ******************************************
+
+
+ @app.route('/noticias', methods=['POST'])
+ def noticiasDatos():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+ return render_template('noticias.html')
+
+# ******************************************
+
+# * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
+
+ @app.route('/denuncia')
+ def denuncia():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+     return render_template('denuncia.html')
+
+
+# ******************************************
+
+
+ @app.route('/denuncia', methods=['POST'])
+ def denunciaDatos():
+
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
+ return render_template('denuncia.html')
+
+# ******************************************
+
+# * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
 # @app.route('/nuevaRuta')
 # def nuevaRuta():
@@ -217,7 +397,7 @@ def home():
 # return render_template('nuevaRuta.html')
 
 # ******************************************
-#*PAGE ERROR
+# *PAGE ERROR
 @app.errorhandler(404)
 def page_no_found(error):
 
@@ -228,7 +408,7 @@ def page_no_found(error):
 
 
 # ******************************************
-#*MAIN
+# *MAIN
 if __name__ == "__main__":
 
     """
