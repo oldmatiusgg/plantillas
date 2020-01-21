@@ -7,6 +7,8 @@ import random
 import csv
 # *Importar MONGO DB
 from pymongo import MongoClient
+#* Libreria Documentación
+import doctest
 
 # *DATOS BASE DE DATOS EN LA NUBE
 '''
@@ -52,12 +54,20 @@ collection = db['nombreCollection']
 @app.route('/')
 def redireccionar():
 
+    """
+    RUTA REDIRECCIONAR A LA RUTA HOME
+    """
+
     return redirect(url_for('home'))
 
 # ******************************************
 #* RUTE HOMRE
 @app.route('/home')
 def home():
+
+    """
+    RUTA HOME
+    """
 
     return render_template('home.html')
 
@@ -68,6 +78,10 @@ def home():
 #* Por sí lo necesitas
 # @app.route('/home', methods=['GET', 'POST'])
 # def homeDatos():
+
+    """
+    LLEGADA DE DATOS A LA RUTA HOME, ESTO ES PARA PODER LIMPIAR LA SESSION CUANDO VUELVAN A HOME A TRAVEZ DE LA APLICACIÓN.
+    """
 
 #     if request.method == 'POST':
 
@@ -86,11 +100,19 @@ def home():
 # @app.route('/usuario')
 # def usuario():
 
+    """
+    RUTA USUARIO, PARA INGRESAR EL LOGIN. USUARIO Y CONTRAÑESA, O SOLO USUARIO DEPENDIENDO DEL CASO
+    """
+
 #     return render_template('usuario.html')
 
 # ******************************************
 # @app.route('/usuario', methods=['POST'])
 # def usuariodatos():
+
+    """
+    LLEGADA DATOS DE USUARIO, CON LOS DATOS DEL LOGIN, PARA PODER INGRESAR A LA APLICACIÓN EN SÍ.
+    """
 
 #     # * Lista que almacena al usuario
 #     listaUsuarioCorrecto = []
@@ -133,12 +155,20 @@ def home():
 # @app.route('/registro')
 # def registro():
 
+    """
+    RUTA REGISTRO, PARA REGISTRARSE EN LA APLICACIÓN
+    """
+
 #     return render_template('registro.html')
 
 
 # ******************************************
 # @app.route('/registro', methods=['GET', 'POST'])
 # def registroDatos():
+
+    """
+    LLEGADA DE DATOS A LA RUTA REGISTRO. PARA REGISTRAR AL USUARIO EN LA APLICACIÓN
+    """
 
 #     if request.method == 'POST':
 
@@ -167,6 +197,10 @@ def home():
 # @app.route('/nuevaRuta')
 # def nuevaRuta():
 
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
 #     return render_template('nuevaRuta.html')
 
 
@@ -176,17 +210,29 @@ def home():
 # @app.route('/nuevaRuta', methods=['POST'])
 # def nuevaRutaDatos():
 
+    """
+    RUTA NOMBRERUTA, TE PERMITE
+    """
+
 # return render_template('nuevaRuta.html')
 
 # ******************************************
 #*PAGE ERROR
 @app.errorhandler(404)
 def page_no_found(error):
+
+    """
+    RUTA DE 'PAGINA NO ENCONTRADA', POR SI ALGUIEN PONE LA RUTA DE URL MAL.
+    """
     return '<h1> Pagina no encontrada, siga buscando</h1>'
 
 
 # ******************************************
 #*MAIN
 if __name__ == "__main__":
+
+    """
+    MAIN, PARA INICIAR MAIN.PY
+    """
 
     app.run('0.0.0.0', '5000', debug=True)
