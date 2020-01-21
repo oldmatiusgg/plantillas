@@ -26,3 +26,8 @@ class Reciclaje():
         self.usuario = usuario
 
         #* contraseña de SESSION
+
+
+    def perfil(self):
+
+        

@@ -68,7 +68,7 @@ def home():
     """
 
     logo = 'logo'
-
+listaUsuarioCorrecto[1] == contrasenya
     # print(f'todavía existe la session: ' + session['usuario'])
 
     if 'usuario' in session:
@@ -224,6 +224,9 @@ def perfilDatos():
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
+
+    #* objeto de Clase Reciclaje
+    objReciclaje = Reciclaje(collectionusuarios, session['usuario'], session['password'])
 
     return render_template('perfil.html')
 
