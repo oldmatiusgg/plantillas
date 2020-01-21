@@ -1,6 +1,6 @@
 from flask import Flask, url_for, session, request, redirect, render_template
 # * Importación Paquete con la clase
-from paquete.Clase import nombreClase
+from reciclaje.Reciclaje import Reciclaje
 # *Random
 import random
 # * CSV
@@ -122,27 +122,35 @@ def usuariodatos():
 
     usuario = request.form['usuario']
 
-    leer_usuario = collectionUsuarios.find({'usuario': f'{usuario}'})
+    contrasenya = request.form['contrasenya']
+
+    leer_usuario = collectionUsuarios.find({'usuario': f'{usuario}', 'password': f'{contrasenya}'})
 
     # print(list(leer_usuario))
 
     for i in leer_usuario:
 
         print(i['usuario'])
-        listaUsuarioCorrecto.append(i['usuario'])
+        listaUsuarioCorrecto.extend([i['usuario'], i['password']])
 
     # print(listaUsuarioCorrecto[0])
 
     if listaUsuarioCorrecto != []:
 
-        if listaUsuarioCorrecto[0] == usuario:
+        if listaUsuarioCorrecto[0] == usuario and listaUsuarioCorrecto[1] == contrasenya:
+
+            print(f'contraseña ingresada: {contrasenya}')
+
+                
             # * iniciar sesion
             # * Limpiamos la session cada vez que haga una nueva session.
             session.clear()
             session['usuario'] = usuario
+            session['password'] = contrasenya
             print('session creada')
 
             return redirect(url_for('perfil'))
+
 
         else:
 
@@ -175,6 +183,8 @@ def registroDatos():
 
         usuario = request.form['usuario']
 
+        contrasenya = request.form['contrasenya']
+
         leer_usuario = collectionUsuarios.find({'usuario': f'{usuario}'})
 
         # print(list(leer_usuario))
@@ -184,7 +194,7 @@ def registroDatos():
 
             return render_template('registro.html', usuario_existe=True)
 
-        collectionUsuarios.insert_one({"usuario": usuario})
+        collectionUsuarios.insert_one({"usuario": usuario, 'password': contrasenya})
 
         return redirect(url_for('usuario'))
 

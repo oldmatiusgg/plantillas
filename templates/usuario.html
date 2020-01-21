@@ -18,6 +18,9 @@
 
 <form action="{{ url_for('usuario') }}" method="post">
 
+
+    <!--oooooooooooooooooooooooooooooooooooooooooooooooo-->
+
     <label for="usuario">
         USUARIO
     </label>
@@ -25,6 +28,16 @@
     <input type="text" name="usuario" required>
 
     <br>
+
+    <!--oooooooooooooooooooooooooooooooooooooooooooooooo-->
+
+    <label for="contrasenya">
+        Contraseña
+    </label>
+
+    <input type="password" name="contrasenya" required>
+
+    <!--oooooooooooooooooooooooooooooooooooooooooooooooo-->
 
     <br>
 
@@ -36,7 +49,7 @@
 
 {% if no_usuario == True %}
 
-<h1>  NO HAY NINGUN USUARIO, VUELVE A INTENTARLO, O REGISTRATE:</h1>
+<h1>  NO HAY NINGUN USUARIO O LA CONTRASEÑA ESTA INCORRECTA, VUELVE A INTENTARLO, O REGISTRATE:</h1>
 
 <br>
 
@@ -48,6 +61,9 @@
 {% endif %}
 
 <br>
+
+<br>
+
 
 
 

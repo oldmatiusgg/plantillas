@@ -11,15 +11,86 @@
 {% block main %}
 
 <div class="contenedor">
+
+
+    <section>
+
+        <label for="email">
+            Email
+        </label>
+
+        <input type="email" name="email">
+
+        <br>
+
+        <!--oooooooooooooooooooooooooooooooooooooo-->
+
+        <h2>Nivel de Participación: </h2>
+
+        <br>
+
+        <!--oooooooooooooooooooooooooooooooooooooo-->
+
+        <h2>Donaciones Hechas</h2>
+
+        <br>
+
+        <!--oooooooooooooooooooooooooooooooooooooo-->
+
+        <h2>Número de eventos en los que has participado</h2>
+
+        <br>
+
+        <!--oooooooooooooooooooooooooooooooooooooo-->
+
+        <h2>Logros: </h2>
+
+        <br>
+
+        <!--oooooooooooooooooooooooooooooooooooooo-->
+
+
+        <h2>Fotos: </h2>
+
+        <!--oooooooooooooooooooooooooooooooooooooo-->
+
+        <br>
+
+        <h2>Videos: </h2>
+
+        <!--oooooooooooooooooooooooooooooooooooooo-->
+
+        <br>
+
+        <h2>Comienza la aventura ProLevel</h2>
+
+        
+
+    </section>
+
     <br>
 
+<!--?????????????????????????????????????????????????-->
 
+        <!--Como el tipo de envío del FORM es POST, en main.py, borrará la session que hay actualmente-->
 
     <form action="{{ url_for('home') }}" method="post">
     
-        <button type="submit">VOLVER A HOME</button>
+        <button type="submit">CERRAR SESSION</button>
         
         </form>
+
+        <br>
+
+        <!--?????????????????????????????????????????????????-->
+
+        <!--Como el tipo de envío del FORM es GET, en main.py, no borrará la session que hay actualmente-->
+
+        <form action="{{ url_for('home') }}" method="GET">
+    
+            <button type="submit">VOLVER AL INICIO</button>
+            
+            </form>
 
 </div>
 
