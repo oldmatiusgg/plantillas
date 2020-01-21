@@ -1,0 +1,23 @@
+<!--Por si usar WTFforms-->
+
+{% macro formularioContacto(campo) %}
+
+
+{{ campo.label }}
+
+
+{{ campo(**kwargs) | safe }}
+
+
+{% if campo.errors %}
+
+    {% for error in campo.errors %}
+
+    <h1> {{ error }} </h1>
+
+    {% endfor %}
+
+    {% endif %}
+
+{% endmacro %}
+

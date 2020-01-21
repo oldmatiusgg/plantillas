@@ -1,0 +1,22 @@
+main{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    
+}
+
+/* HOME.HTML */
+
+.contenedor{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 360px;
+    height: 800px;
+}

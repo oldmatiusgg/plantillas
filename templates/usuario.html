@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+
+
+
+{% endblock %}
+
+<!-- ***************************************************-->
+
+{% block main %}
+
+
+
+<div class="contenedor">
+
+<h1>INGRESA TU USUARIO Y JUEGA</h1>
+
+<form action="{{ url_for('usuario') }}" method="post">
+
+    <label for="usuario">
+        USUARIO
+    </label>
+
+    <input type="text" name="usuario" required>
+
+    <br>
+
+    <br>
+
+
+    <button type="submit">INGRESA Y COMIENZA A JUGAR</button>
+
+</form>
+
+
+{% if no_usuario == True %}
+
+<h1>  NO HAY NINGUN USUARIO, VUELVE A INTENTARLO, O REGISTRATE:</h1>
+
+<br>
+
+<a href="{{ url_for('registro') }}">REGISTRATE</a>
+
+
+
+
+{% endif %}
+
+<br>
+
+
+
+<form action="{{ url_for('home') }}" method="post">
+
+    <button type="submit">VOLVER A HOME</button>
+    
+    </form>
+
+</div>
+
+
+{% endblock %}

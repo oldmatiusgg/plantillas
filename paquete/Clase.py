@@ -4,8 +4,8 @@ import os
 """
 CLASS 
 """
-class Restaurante():
+class nombreClase():
 
     def __init__(self):
 
-        self.inicio = inicio
+        self.inicio = 0
