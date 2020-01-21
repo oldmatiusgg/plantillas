@@ -42,7 +42,7 @@ collection = db['nombreCollection']
 #*******************************************
 
 #* Objeto
-# objetoClase = nombreClase()
+# objetoClase = nombreClase(collection, session['usuario])
 
 
 #*******************************************
