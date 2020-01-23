@@ -9,6 +9,8 @@ import csv
 from pymongo import MongoClient
 # * Libreria Documentación
 import doctest
+#* libreria Datetime
+import datetime
 
 # *DATOS BASE DE DATOS EN LA NUBE
 '''
@@ -39,10 +41,8 @@ collection = db['nombreCollection']
 # * Collecion usuarios, por si necesitas un login
 collectionUsuarios = db['usuarios']
 
-# *******************************************
-
-# * Objeto
-# objetoClase = nombreClase()
+# **********
+# * no se puede crear un objeto general!!!
 
 
 # *******************************************
@@ -68,7 +68,7 @@ def home():
     """
 
     logo = 'logo'
-listaUsuarioCorrecto[1] == contrasenya
+# listaUsuarioCorrecto[1] == contrasenya
     # print(f'todavía existe la session: ' + session['usuario'])
 
     if 'usuario' in session:
@@ -124,7 +124,8 @@ def usuariodatos():
 
     contrasenya = request.form['contrasenya']
 
-    leer_usuario = collectionUsuarios.find({'usuario': f'{usuario}', 'password': f'{contrasenya}'})
+    leer_usuario = collectionUsuarios.find(
+        {'usuario': f'{usuario}', 'password': f'{contrasenya}'})
 
     # print(list(leer_usuario))
 
@@ -141,7 +142,6 @@ def usuariodatos():
 
             print(f'contraseña ingresada: {contrasenya}')
 
-                
             # * iniciar sesion
             # * Limpiamos la session cada vez que haga una nueva session.
             session.clear()
@@ -150,7 +150,6 @@ def usuariodatos():
             print('session creada')
 
             return redirect(url_for('perfil'))
-
 
         else:
 
@@ -194,7 +193,8 @@ def registroDatos():
 
             return render_template('registro.html', usuario_existe=True)
 
-        collectionUsuarios.insert_one({"usuario": usuario, 'password': contrasenya})
+        collectionUsuarios.insert_one(
+            {"usuario": usuario, 'password': contrasenya})
 
         return redirect(url_for('usuario'))
 
@@ -207,7 +207,6 @@ def registroDatos():
 
 @app.route('/perfil')
 def perfil():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -220,13 +219,15 @@ def perfil():
 
 @app.route('/perfil', methods=['POST'])
 def perfilDatos():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
 
-    #* objeto de Clase Reciclaje
-    objReciclaje = Reciclaje(collectionusuarios, session['usuario'], session['password'])
+    # * objeto de Clase Reciclaje
+    # objReciclaje = Reciclaje(
+    #     collectionUsuarios, session['usuario'], session['password'])
+
+    # * Metodo Perfil.
 
     return render_template('perfil.html')
 
@@ -234,9 +235,9 @@ def perfilDatos():
 
 # * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
+
 @app.route('/reciclar')
 def reciclar():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -249,7 +250,6 @@ def reciclar():
 
 @app.route('/reciclar', methods=['POST'])
 def reciclarDatos():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -260,13 +260,12 @@ def reciclarDatos():
 
 # * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
+
 @app.route('/eventos')
 def eventos():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
-
 
     return render_template('eventos.html')
 
@@ -276,7 +275,6 @@ def eventos():
 
 @app.route('/eventos', methods=['POST'])
 def eventosDatos():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -287,9 +285,9 @@ def eventosDatos():
 
 # * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
+
 @app.route('/educacion')
 def educacion():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -302,7 +300,6 @@ def educacion():
 
 @app.route('/educacion', methods=['POST'])
 def educacionDatos():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -313,9 +310,9 @@ def educacionDatos():
 
 # * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
+
 @app.route('/crearEvento')
 def crearEvento():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -328,10 +325,36 @@ def crearEvento():
 
 @app.route('/crearEvento', methods=['POST'])
 def crearEventoDatos():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
+    # * inputs con la información de la creación de un nuevo evento.
+    lugar = request.form['lugar']
+    fecha = request.form['fecha']
+    capacidad = request.form['capacidad']
+    labor = request.form['labor']
+    descripcion = request.form['descripcion']
+    donacion = request.form['donacion']
+
+    # * objeto de Clase Reciclaje
+    objReciclaje = Reciclaje(
+        collectionUsuarios, session['usuario'], session['password'])
+
+    # * Metodo CrearClase, que perimtirá registrar el evento en el usuario
+    crearEvento = objReciclaje.crearEvento(
+        lugar, fecha, capacidad, labor, descripcion, donacion)
+
+    print(crearEvento)
+
+    #*Fecha y hora actual
+    x = datetime.datetime.now()
+
+    anyo = fecha.split('-')[0]
+    anyoActual = x.strftime("%Y")
+
+    if int(anyo) < int(anyoActual):
+
+        return render_template('crearEvento.html', anyo_mal=True)
 
     return render_template('crearEvento.html')
 
@@ -339,9 +362,9 @@ def crearEventoDatos():
 
 # * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
+
 @app.route('/noticias')
 def noticias():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -354,7 +377,6 @@ def noticias():
 
 @app.route('/noticias', methods=['POST'])
 def noticiasDatos():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -365,9 +387,9 @@ def noticiasDatos():
 
 # * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
+
 @app.route('/denuncia')
 def denuncia():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -380,7 +402,6 @@ def denuncia():
 
 @app.route('/denuncia', methods=['POST'])
 def denunciaDatos():
-
     """
     RUTA NOMBRERUTA, TE PERMITE
     """
@@ -391,10 +412,34 @@ def denunciaDatos():
 
 # * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
+
+@app.route('/donaciones')
+def donaciones():
+    """
+    RUTA DONACIONES, TE PERMITE
+    """
+
+    return render_template('donaciones.html')
+
+
+# ******************************************
+
+
+@app.route('/donaciones', methods=['POST'])
+def donacionesDatos():
+    """
+    RUTA DONACIONES, TE PERMITE
+    """
+
+    return render_template('donaciones.html')
+
+# ******************************************
+
 # @app.route('/nuevaRuta')
 # def nuevaRuta():
 
-    """
+
+"""
     RUTA NOMBRERUTA, TE PERMITE
     """
 
@@ -407,7 +452,7 @@ def denunciaDatos():
 # @app.route('/nuevaRuta', methods=['POST'])
 # def nuevaRutaDatos():
 
-    """
+"""
     RUTA NOMBRERUTA, TE PERMITE
     """
 
@@ -417,7 +462,6 @@ def denunciaDatos():
 # *PAGE ERROR
 @app.errorhandler(404)
 def page_no_found(error):
-
     """
     RUTA DE 'PAGINA NO ENCONTRADA', POR SI ALGUIEN PONE LA RUTA DE URL MAL.
     """

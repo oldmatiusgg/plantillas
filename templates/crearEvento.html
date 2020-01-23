@@ -12,6 +12,134 @@
 
 <div class="contenedor">
 
+    <!--Form-->
+
+    <form action="{{ url_for('crearEvento') }}" method="post">
+
+    <!--???????????????????????????????????????????-->
+
+    <!--CREAR EVENTO-->
+
+    <h1>CREA TU EVENTO, Y CONSIGUE AYUDAR AL MEDIO AMBIENTE CON TU LABOR</h1>
+
+    <!--Lugar-->
+
+    <label for="lugar">
+        Lugar del evento
+    </label>
+    
+    <br>
+
+    <input type="text" name="lugar">
+    
+    <br>
+
+    <!--fecha y horario-->
+
+    <label for="fecha">
+        Fecha del evento
+    </label>
+    
+    <br>
+
+    <input type="datetime-local" name="fecha">
+
+    <br>
+
+    {% if anyo_mal == True %}
+
+    <h1>Tienes que poner una fecha actual</h1>
+
+    {% endif %}
+    
+    <br>
+
+    <!--Capacidad de personas -->
+
+    <label for="capacidad">
+        Capacidad de personas
+    </label>
+    
+    <br>
+
+    <input type="number" name="capacidad">
+    
+    <br>
+
+    <!--Labor principal-->
+
+    <h2>Labor del evento</h2>
+
+    <select name="labor">
+
+        <option value="recoger">
+            Recoger Basuras
+        </option>
+
+        <option value="reciclar">
+            Reciclar
+        </option>
+
+        <option value="educacion">
+            Educacion
+        </option>
+
+        <option value="reparar">
+            Reparar zona afectada
+        </option>
+    </select>
+    <br>
+
+    <!--Descripción del evento-->
+
+    <h2>Describe de que se tratá el evento.</h2>
+    <br>
+    <h4>Asegurate de poner condiciones o requisitos si es necesario, si los materiales los proveeras tu o los participantes, entre otras cosas.</h4>
+
+    <br>
+
+
+    <textarea name="descripcion"cols="20" rows="20">
+        Ingresa una descripción
+    </textarea>
+
+    <br>
+
+    <!--Capacidad de donación, es decir dentro de la cantidad que quieran donar-->
+
+    <label for="donacion">
+        Ingresa la cantidad maxima de donacion(Opcional)
+    </label>
+
+    <br>
+
+    <input type="number" name="donacion" value=0>
+
+    <br>
+
+    <!-- Horario -->
+
+    <button type="submit">CREAR EVENTO</button>
+
+    <br>
+    
+    </form>
+
+
+    <!--???????????????????????????????????????????-->
+
+    <br>
+
+    <!--?????????????????????????????????????????????????-->
+
+        <!--Como el tipo de envío del FORM es GET, en main.py, no borrará la session que hay actualmente-->
+
+        <form action="{{ url_for('home') }}" method="GET">
+    
+            <button type="submit">VOLVER AL INICIO</button>
+            
+            </form>
+
 
 </div>
 
