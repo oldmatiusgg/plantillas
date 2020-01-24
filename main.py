@@ -41,6 +41,9 @@ collection = db['nombreCollection']
 # * Collecion usuarios, por si necesitas un login
 collectionUsuarios = db['usuarios']
 
+#* Collection Eventos
+collectionEventos = db['eventos']
+
 # **********
 # * no se puede crear un objeto general!!!
 
@@ -132,7 +135,7 @@ def usuariodatos():
     for i in leer_usuario:
 
         print(i['usuario'])
-        listaUsuarioCorrecto.extend([i['usuario'], i['password']])
+        listaUsuarioCorrecto.extend([i['usuario'], i['password'], str(i['_id'])])
 
     # print(listaUsuarioCorrecto[0])
 
@@ -147,6 +150,7 @@ def usuariodatos():
             session.clear()
             session['usuario'] = usuario
             session['password'] = contrasenya
+            session['usuario_id'] = listaUsuarioCorrecto[2]
             print('session creada')
 
             return redirect(url_for('perfil'))
@@ -225,7 +229,7 @@ def perfilDatos():
 
     # * objeto de Clase Reciclaje
     # objReciclaje = Reciclaje(
-    #     collectionUsuarios, session['usuario'], session['password'])
+    #     collectionUsuarios, session['usuario'], session['password'], session['usuario_id])
 
     # * Metodo Perfil.
 
@@ -338,7 +342,7 @@ def crearEventoDatos():
 
     # * objeto de Clase Reciclaje
     objReciclaje = Reciclaje(
-        collectionUsuarios, session['usuario'], session['password'])
+        collectionEventos, session['usuario'], session['password'], session['usuario_id'])
 
     # * Metodo CrearClase, que perimtirá registrar el evento en el usuario
     (listaDatos, mensaje) = objReciclaje.crearEvento(
@@ -347,10 +351,10 @@ def crearEventoDatos():
     print(crearEvento)
 
     #*Fecha y hora actual
-    x = datetime.datetime.now()
+    # x = datetime.datetime.now()
 
-    anyo = fecha.split('-')[0]
-    anyoActual = x.strftime("%Y")
+    # anyo = fecha.split('-')[0]
+    # anyoActual = x.strftime("%Y")
 
 
 

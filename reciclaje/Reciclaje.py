@@ -14,7 +14,7 @@ class Reciclaje():
     CLASE NOMBRECLASE, NOS PERMITIRÁ APLICAR LOS METODOS A LO QUE NECESITEMOS MEDIANTE EL OBJETO
     """
 
-    def __init__(self, collection, usuario, contraseña):
+    def __init__(self, collection, usuario, contrasenya, usuario_id):
 
         """
         CONTRUCTOR DE LA CLASE NOMBRECLASE
@@ -29,6 +29,10 @@ class Reciclaje():
         self.usuario = usuario
 
         #* contraseña de SESSION
+        self.contrasenya = contrasenya
+
+        #* id Usuario de MongoDB
+        self.usuario_id = usuario_id
 
 
     # def perfil(self):
@@ -59,6 +63,18 @@ class Reciclaje():
         #* Mensaje que se enviará
         mensaje = ''
 
+        #* Diccionario donde está la información para agregar el evento
+        diccEvento = {
+            'usuario_id': self.usuario_id,
+            'lugar': lugar,
+            'fecha': f'{anyo}-{mes}-{dia}',
+            'horario': hora,
+            'capacidad': capacidad,
+            'labor': labor,
+            'descripcion': descripcion,
+            'donacion': donacion
+        }
+
 
         # print(anyoActual)
 
@@ -77,11 +93,17 @@ class Reciclaje():
 
                 mensaje = f'Esta la cantidad maxima de donación que has colocado: {donacion}'
 
+                agregarEvento = self.collection.insert_one(diccEvento)
+
                 return listaDatos, mensaje
 
             else:
 
                 mensaje = 'Has decidido que la maxima cantidad de donación sea INFINITO'
+
+                donacion = 'infinito'
+
+                agregarEvento = self.collection.insert_one(diccEvento)
 
                 return listaDatos, mensaje
 
