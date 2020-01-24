@@ -283,7 +283,23 @@ def eventosDatos():
     RUTA NOMBRERUTA, TE PERMITE
     """
 
-    return render_template('eventos.html')
+    # * inputs con la información de la creación de un nuevo evento.
+    lugar = request.form['lugar']
+    fecha = request.form['fecha']
+    nombreEvento = request.form['nombreEvento']
+    labor = request.form['labor']
+    donacion = request.form['donacion']
+
+    # * objeto de Clase Reciclaje
+    objReciclaje = Reciclaje(
+        collectionEventos, session['usuario'], session['password'], session['usuario_id'])
+
+    # * Metodo CrearClase, que perimtirá registrar el evento en el usuario
+    #* (lugar, fecha, nombreEvento, labor, descripcion, capacidad)
+    (listaEventos, mensaje) = objReciclaje.evento(
+        lugar, fecha, nombreEvento, labor, donacion)
+
+    return render_template('eventos.html', lista=listaEventos)
 
 # ******************************************
 

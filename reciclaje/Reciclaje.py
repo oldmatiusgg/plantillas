@@ -108,9 +108,40 @@ class Reciclaje():
                 return listaDatos, mensaje
 
 
+    def evento(self, lugar, fecha, nombreEvento, labor, donacion):
 
+        anyo = fecha.split('-')[0]
+        mes = fecha.split('-')[1]
+        dia = fecha.split('-')[2]
 
+        diccEvento = {
+            'lugar': lugar,
+            'fecha': f'{anyo}-{mes}-{dia}',
+            'labor': labor,
+            'donacion': donacion
+        }
 
+        #* Lista donde agregamos las querys con la información
+        listaQuery = []
 
+        #* Querys de MONGODB, en donde se tiene todas las posibilidades si el usuario
+        #* le da por buscar solo con la fecha, o lugar, o también labor o hasta los eventos que tienen una cantidad
+        #* determinada de donación. Es decir, que le usuario tenga todas las posibilidades de busqueda, que no tenga que poner
+        #* todos los campos del formulario de busqueda sino que busque por el filtro que el usuario quiera.
+        buscarEvento = self.collection(diccEvento)
 
+        for i in list(buscarEvento):
+
+            listaQuery.append(i)
+
+        if listaQuery != []:
+
+            print(listaQuery[0])
+
+            mensaje = 'Busqueda completa, es decir, todos los campos fueron completas en la búsqueda'
+
+            return listaQuery[0], mensaje
         
+        # else:
+
+        #     listaQuery.clear()

@@ -12,11 +12,101 @@
 
 <div class="contenedor">
 
+    <!--??????????????????????????????????????????????-->
+
+    <!-- TODO  //Buscador Eventos-->
+
+    <form action="{{ url_for('eventos') }}" method="post">
+
+    <!--Nombre Evento -->
+
+    <label for="nombreEvento">
+        Nombre Evento
+    </label>
+
+    <input type="text" name="nombreEvento">
+
+    <br>
+
+    <!--Lugar-->
+
+    <label for="lugar">
+        Lugar del evento
+    </label>
+    
+    <br>
+
+    <input type="text" name="lugar">
+    
+    <br>
+
+    <!--Labor principal-->
+
+    <h2>Labor del evento</h2>
+
+    <select name="labor">
+
+        <option value="recoger">
+            Recoger Basuras
+        </option>
+
+        <option value="reciclar">
+            Reciclar
+        </option>
+
+        <option value="educacion">
+            Educacion
+        </option>
+
+        <option value="reparar">
+            Reparar zona afectada
+        </option>
+    </select>
+    <br>
+
+        <!--fecha y horario-->
+
+        <label for="fecha">
+            Fecha del evento
+        </label>
+        
+        <br>
+    
+        <input type="date" name="fecha">
+        
+        <br>
+
+        <!--Capacidad de donación-->
+
+        <label for="donacion">
+            Ingresa la cantidad maxima de donacion(Opcional)
+        </label>
+    
+        <br>
+    
+        <input type="number" name="donacion">
+        
+        <br>
+
+        <button type="submit">BUSCAR EVENTO</button>
+
+    </form>
+
+    <!--??????????????????????????????????????????????-->
+
     <form action="{{ url_for('home') }}" method="post">
     
         <button type="submit">VOLVER A HOME</button>
         
         </form>
+
+    {% for i in lista %}
+
+        <br>
+
+        <h1>{{ i }}</h1>
+
+    {% endfor %}
         
 </div>
 
