@@ -101,7 +101,7 @@ class Reciclaje():
 
                 mensaje = 'Has decidido que la maxima cantidad de donación sea INFINITO'
 
-                donacion = 'infinito'
+                diccEvento['donacion'] = 'infinito'
 
                 agregarEvento = self.collection.insert_one(diccEvento)
 
