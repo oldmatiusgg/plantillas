@@ -341,7 +341,7 @@ def crearEventoDatos():
         collectionUsuarios, session['usuario'], session['password'])
 
     # * Metodo CrearClase, que perimtirá registrar el evento en el usuario
-    crearEvento = objReciclaje.crearEvento(
+    (listaDatos, mensaje) = objReciclaje.crearEvento(
         lugar, fecha, capacidad, labor, descripcion, donacion)
 
     print(crearEvento)
@@ -352,11 +352,19 @@ def crearEventoDatos():
     anyo = fecha.split('-')[0]
     anyoActual = x.strftime("%Y")
 
-    if int(anyo) < int(anyoActual):
 
-        return render_template('crearEvento.html', anyo_mal=True)
 
-    return render_template('crearEvento.html')
+    # if int(anyo) < int(anyoActual):
+
+    #     return render_template('crearEvento.html', anyo_mal=True)
+
+    # else:
+
+    #     if donacion == '':
+
+    #         return render_template('crearEvento.html', donacion=True)
+
+    return render_template('crearEvento.html', mensaje=mensaje)
 
 # ******************************************
 

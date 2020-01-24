@@ -43,14 +43,6 @@
     <br>
 
     <input type="datetime-local" name="fecha">
-
-    <br>
-
-    {% if anyo_mal == True %}
-
-    <h1>Tienes que poner una fecha actual</h1>
-
-    {% endif %}
     
     <br>
 
@@ -99,7 +91,7 @@
     <br>
 
 
-    <textarea name="descripcion"cols="20" rows="20">
+    <textarea name="descripcion"cols="20" rows="20" >
         Ingresa una descripción
     </textarea>
 
@@ -113,8 +105,8 @@
 
     <br>
 
-    <input type="number" name="donacion" value=0>
-
+    <input type="number" name="donacion">
+    
     <br>
 
     <!-- Horario -->
@@ -124,6 +116,10 @@
     <br>
     
     </form>
+
+    <!--? Mensaje sobre fecha y donación dependiendo de lo que el usuario coloque ?-->
+
+    <h1>{{ mensaje }}</h1>
 
 
     <!--???????????????????????????????????????????-->

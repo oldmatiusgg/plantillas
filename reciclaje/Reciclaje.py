@@ -56,6 +56,9 @@ class Reciclaje():
         diaActual = x.strftime("%d")
         horaActual = x.strftime("%X")
 
+        #* Mensaje que se enviará
+        mensaje = ''
+
 
         # print(anyoActual)
 
@@ -65,20 +68,22 @@ class Reciclaje():
 
             mensaje = 'Tienes que poner una fecha actual'
 
-            return mensaje
+            return listaDatos, mensaje
         
         else:
 
 
-            if donacion != 0:
+            if donacion != '':
 
-                return listaDatos
+                mensaje = f'Esta la cantidad maxima de donación que has colocado: {donacion}'
+
+                return listaDatos, mensaje
 
             else:
 
-                donacion = 'Has decidido que la maxima cantidad de donación sea INFINITO'
+                mensaje = 'Has decidido que la maxima cantidad de donación sea INFINITO'
 
-                return listaDatos
+                return listaDatos, mensaje
 
 
 
