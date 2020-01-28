@@ -94,19 +94,23 @@
 
     <!--??????????????????????????????????????????????-->
 
-    <form action="{{ url_for('home') }}" method="post">
+    <form action="{{ url_for('home') }}" method="POST">
     
         <button type="submit">VOLVER A HOME</button>
         
         </form>
 
-    {% for i in lista %}
+    {% for i in evento %}
 
         <br>
 
         <h1>{{ i }}</h1>
 
     {% endfor %}
+
+    <br>
+
+    <h1> {{ mensaje }} </h1>
         
 </div>
 

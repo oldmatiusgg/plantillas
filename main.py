@@ -70,6 +70,8 @@ def home():
     RUTA HOME
     """
 
+    print(session['usuario'])
+
     logo = 'logo'
 # listaUsuarioCorrecto[1] == contrasenya
     # print(f'todavía existe la session: ' + session['usuario'])
@@ -296,10 +298,17 @@ def eventosDatos():
 
     # * Metodo CrearClase, que perimtirá registrar el evento en el usuario
     #* (lugar, fecha, nombreEvento, labor, descripcion, capacidad)
-    (listaEventos, mensaje) = objReciclaje.evento(
+    # (listaEventos, mensaje) = objReciclaje.evento(
+    #     lugar, fecha, nombreEvento, labor, donacion)
+
+    (diccevento, mensaje) = objReciclaje.evento(
         lugar, fecha, nombreEvento, labor, donacion)
 
-    return render_template('eventos.html', lista=listaEventos)
+    print(diccevento)
+
+    # return render_template('eventos.html', lista=listaEventos)
+
+    return render_template('eventos.html', evento=diccevento, mensaje=mensaje)
 
 # ******************************************
 

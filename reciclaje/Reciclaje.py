@@ -72,7 +72,7 @@ class Reciclaje():
             'capacidad': capacidad,
             'labor': labor,
             'descripcion': descripcion,
-            'donacion': donacion
+            'donacion': int(donacion)
         }
 
 
@@ -118,8 +118,10 @@ class Reciclaje():
             'lugar': lugar,
             'fecha': f'{anyo}-{mes}-{dia}',
             'labor': labor,
-            'donacion': donacion
+            'donacion': int(donacion)
         }
+
+        # print(diccEvento)
 
         #* Lista donde agregamos las querys con la información
         listaQuery = []
@@ -128,7 +130,10 @@ class Reciclaje():
         #* le da por buscar solo con la fecha, o lugar, o también labor o hasta los eventos que tienen una cantidad
         #* determinada de donación. Es decir, que le usuario tenga todas las posibilidades de busqueda, que no tenga que poner
         #* todos los campos del formulario de busqueda sino que busque por el filtro que el usuario quiera.
-        buscarEvento = self.collection(diccEvento)
+        buscarEvento = self.collection.find(diccEvento)
+
+        print(list(buscarEvento))
+
 
         for i in list(buscarEvento):
 
@@ -138,10 +143,12 @@ class Reciclaje():
 
             print(listaQuery[0])
 
-            mensaje = 'Busqueda completa, es decir, todos los campos fueron completas en la búsqueda'
+            mensaje = 'Busqueda completa, es decir, todos los campos/inputs se les fue introducido valores'
 
-            return listaQuery[0], mensaje
+            return listaQuery, mensaje
         
         # else:
 
         #     listaQuery.clear()
+
+        # return diccEvento
