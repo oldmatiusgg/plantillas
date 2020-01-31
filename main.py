@@ -309,11 +309,11 @@ def eventosDatos():
         lugar, fecha, nombreEvento, labor, donacion)
 
     print(diccevento)
-    print(mensaje)
-
-    # return render_template('eventos.html', lista=listaEventos)
+    # print(mensaje)
 
     return render_template('eventos.html', evento=diccevento, mensaje=mensaje)
+
+    # return render_template('eventos.html')
 
 # ******************************************
 

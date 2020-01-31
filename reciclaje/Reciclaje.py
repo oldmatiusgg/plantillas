@@ -121,7 +121,7 @@ class Reciclaje():
             'donacion': int(donacion)
         }
 
-        # print(diccEvento)
+        print(diccEvento)
 
         #* Lista donde agregamos las querys con la información
         listaQuery = []
@@ -132,20 +132,29 @@ class Reciclaje():
         #* todos los campos del formulario de busqueda sino que busque por el filtro que el usuario quiera.
         buscarEvento = self.collection.find(diccEvento)
 
-        print(list(buscarEvento))
+        print('Antes de que se haga el filtro')
 
+        # print(list(buscarEvento))
 
+        #* RECORDAR: Cuando le aplicamos list() a la variable que contiene la query, solo debemos hacerlo una vez, porque si lo hacemos más veces
+        #* entonces no te funcionará
         for i in list(buscarEvento):
 
             listaQuery.append(i)
 
         if listaQuery != []:
 
+            print('Despues de que se aplique el filtro')
+
             print(listaQuery[0])
 
             mensaje = 'Busqueda completa, es decir, todos los campos/inputs se les fue introducido valores'
 
-            return listaQuery[0], mensaje
+            print(mensaje)
+
+            return listaQuery, mensaje
+
+            # return listaQuery
         
         # else:
 
