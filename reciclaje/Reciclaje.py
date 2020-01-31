@@ -110,50 +110,106 @@ class Reciclaje():
 
     def evento(self, lugar, fecha, nombreEvento, labor, donacion):
 
-        anyo = fecha.split('-')[0]
-        mes = fecha.split('-')[1]
-        dia = fecha.split('-')[2]
+        
+
+        #???????????????????????
+
+        algunoEstaVacio = []
 
         diccEvento = {
             'lugar': lugar,
-            'fecha': f'{anyo}-{mes}-{dia}',
-            'labor': labor,
-            'donacion': int(donacion)
+            'fecha': fecha,
+            'nombreEvento': nombreEvento, 
+            'labor': labor, 
+            'donacion': donacion
         }
 
-        print(diccEvento)
+        #* diccionario que me ayudará a realizar las querys de los datos no vacios.
+        datosNoVacios = {}
 
-        #* Lista donde agregamos las querys con la información
-        listaQuery = []
+        #* diccionario que me ayudará a realizar las querys de los datosvacios.
+        datosVacios = {}
 
-        #* Querys de MONGODB, en donde se tiene todas las posibilidades si el usuario
-        #* le da por buscar solo con la fecha, o lugar, o también labor o hasta los eventos que tienen una cantidad
-        #* determinada de donación. Es decir, que le usuario tenga todas las posibilidades de busqueda, que no tenga que poner
-        #* todos los campos del formulario de busqueda sino que busque por el filtro que el usuario quiera.
-        buscarEvento = self.collection.find(diccEvento)
+        for llave, i in diccEvento.items():
 
-        print('Antes de que se haga el filtro')
+            if i != '':
 
-        # print(list(buscarEvento))
+                print('Los i"s que no estan vacios')
 
-        #* RECORDAR: Cuando le aplicamos list() a la variable que contiene la query, solo debemos hacerlo una vez, porque si lo hacemos más veces
-        #* entonces no te funcionará
-        for i in list(buscarEvento):
+                print(f'{llave}: {i}')
 
-            listaQuery.append(i)
+                datosNoVacios[llave] = i
 
-        if listaQuery != []:
+                # for llaveNoVacio, valorNoVacio in datosNoVacios.items():
+                if 'fecha' in datosNoVacios:
 
-            print('Despues de que se aplique el filtro')
+                    anyo = fecha.split('-')[0]
+                    mes = fecha.split('-')[1]
+                    dia = fecha.split('-')[2]
 
-            print(listaQuery[0])
+                    datosNoVacios['fecha']: f'{anyo}-{mes}-{dia}' 
 
-            mensaje = 'Busqueda completa, es decir, todos los campos/inputs se les fue introducido valores'
+                else:
 
-            print(mensaje)
+                    print('No se encuentra la llave FECHA en el diccionario de los datosNoVacios')
 
-            return listaQuery, mensaje
+                if 'donacion' in datosNoVacios:
 
+                    datosNoVacios['donacion']: int(donacion)
+
+                else:
+
+                    print('No se encuentra la llave DONACIÓN en el diccionario de los datosNoVacios')
+
+                print(datosNoVacios)
+
+                # #??????????????????????????????????????????????????????????????????
+
+                # #* Lista donde agregamos las querys con la información
+                listaQuery = []
+
+                buscarEvento = self.collection.find(datosNoVacios)
+
+                print('Antes de que se haga el filtro')
+
+                # #??????????????????????????????????????????????????????????????????
+
+                # #* RECORDAR: Cuando le aplicamos list() a la variable que contiene la query, solo debemos hacerlo una vez, porque si lo hacemos más veces
+                # #* entonces no te funcionará
+                for i in list(buscarEvento):
+
+                    listaQuery.append(i)
+
+                if listaQuery != []:
+
+                    print('Despues de que se aplique el filtro')
+
+                    print(listaQuery[0])
+
+                    mensaje = 'Busqueda completa, es decir, todos los campos/inputs se les fue introducido valores'
+
+                    print(mensaje)
+
+                    return listaQuery, mensaje
+                
+
+
+
+                # if llave == 'lugar' and llave == 
+
+            else:
+
+                algunoEstaVacio = [i]
+
+        #???????????????????????????????????????
+    
+        for noValor in algunoEstaVacio:
+
+            print('Los i"s que están vacios')
+
+            print(noValor)
+
+        return [diccEvento], 'Haciendo pruebas'
             # return listaQuery
         
         # else:
@@ -161,3 +217,52 @@ class Reciclaje():
         #     listaQuery.clear()
 
         # return diccEvento
+
+        #????????????????????????????
+
+
+        # anyo = fecha.split('-')[0]
+        #         mes = fecha.split('-')[1]
+        #         dia = fecha.split('-')[2]
+
+        #         diccEvento = {
+        #             'lugar': lugar,
+        #             'fecha': f'{anyo}-{mes}-{dia}',
+        #             'labor': labor,
+        #             'donacion': int(donacion)
+        #         }
+
+        #         print(diccEvento)
+
+        #         #* Lista donde agregamos las querys con la información
+        #         listaQuery = []
+
+        #         #* Querys de MONGODB, en donde se tiene todas las posibilidades si el usuario
+        #         #* le da por buscar solo con la fecha, o lugar, o también labor o hasta los eventos que tienen una cantidad
+        #         #* determinada de donación. Es decir, que le usuario tenga todas las posibilidades de busqueda, que no tenga que poner
+        #         #* todos los campos del formulario de busqueda sino que busque por el filtro que el usuario quiera.
+        #         buscarEvento = self.collection.find(diccEvento)
+
+        #         print('Antes de que se haga el filtro')
+
+        #         # print(list(buscarEvento))
+
+        #         #* RECORDAR: Cuando le aplicamos list() a la variable que contiene la query, solo debemos hacerlo una vez, porque si lo hacemos más veces
+        #         #* entonces no te funcionará
+        #         for i in list(buscarEvento):
+
+        #             listaQuery.append(i)
+
+        #         if listaQuery != []:
+
+        #             print('Despues de que se aplique el filtro')
+
+        #             print(listaQuery[0])
+
+        #         mensaje = 'Busqueda completa, es decir, todos los campos/inputs se les fue introducido valores'
+
+        #         print(mensaje)
+
+        #         return listaQuery, mensaje
+
+        
