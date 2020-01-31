@@ -145,7 +145,7 @@ class Reciclaje():
 
             mensaje = 'Busqueda completa, es decir, todos los campos/inputs se les fue introducido valores'
 
-            return listaQuery, mensaje
+            return listaQuery[0], mensaje
         
         # else:
 

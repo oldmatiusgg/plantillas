@@ -70,7 +70,7 @@ def home():
     RUTA HOME
     """
 
-    print(session['usuario'])
+    # session['usuario'] = ''
 
     logo = 'logo'
 # listaUsuarioCorrecto[1] == contrasenya
@@ -81,6 +81,10 @@ def home():
         print(f'todavía existe la session: ' + session['usuario'])
 
         return render_template('home.html', usuario_existe=True, logo='logo')
+
+    else:
+
+        return render_template('home.html', usuario_existe=False, logo='logo')
 
     return render_template('home.html', logo=logo)
 
@@ -305,6 +309,7 @@ def eventosDatos():
         lugar, fecha, nombreEvento, labor, donacion)
 
     print(diccevento)
+    print(mensaje)
 
     # return render_template('eventos.html', lista=listaEventos)
 
