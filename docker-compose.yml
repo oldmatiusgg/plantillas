@@ -1,0 +1,17 @@
+# Numero de la version
+version: "3"
+
+# Contenedores= Servicios
+services:
+    # Carpeta donde esta la imagen
+    app:
+        build: .
+        image: appflask
+        container_name: contenedorflask
+        ports: 
+            - "5500:5000"
+        volumes: 
+            - ./src:/app
+
+    # basededatos:
+    #     image: mongo
