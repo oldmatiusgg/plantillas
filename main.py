@@ -9,7 +9,7 @@ import csv
 from pymongo import MongoClient
 # * Libreria Documentación
 import doctest
-#* libreria Datetime
+# * libreria Datetime
 import datetime
 
 # *DATOS BASE DE DATOS EN LA NUBE
@@ -41,7 +41,7 @@ collection = db['nombreCollection']
 # * Collecion usuarios, por si necesitas un login
 collectionUsuarios = db['usuarios']
 
-#* Collection Eventos
+# * Collection Eventos
 collectionEventos = db['eventos']
 
 # **********
@@ -141,7 +141,8 @@ def usuariodatos():
     for i in leer_usuario:
 
         print(i['usuario'])
-        listaUsuarioCorrecto.extend([i['usuario'], i['password'], str(i['_id'])])
+        listaUsuarioCorrecto.extend(
+            [i['usuario'], i['password'], str(i['_id'])])
 
     # print(listaUsuarioCorrecto[0])
 
@@ -290,6 +291,7 @@ def eventosDatos():
     """
 
     # * inputs con la información de la creación de un nuevo evento.
+    nombreEvento = request.form['nombreEvento']
     lugar = request.form['lugar']
     fecha = request.form['fecha']
     nombreEvento = request.form['nombreEvento']
@@ -301,12 +303,12 @@ def eventosDatos():
         collectionEventos, session['usuario'], session['password'], session['usuario_id'])
 
     # * Metodo CrearClase, que perimtirá registrar el evento en el usuario
-    #* (lugar, fecha, nombreEvento, labor, descripcion, capacidad)
+    # * (lugar, fecha, nombreEvento, labor, descripcion, capacidad)
     # (listaEventos, mensaje) = objReciclaje.evento(
     #     lugar, fecha, nombreEvento, labor, donacion)
 
-    (diccevento, mensaje) = objReciclaje.evento(
-        lugar, fecha, nombreEvento, labor, donacion)
+    (diccevento, mensaje) = objReciclaje.evento(nombreEvento,
+                                                lugar, fecha, labor, donacion)
 
     print(diccevento)
     # print(mensaje)
@@ -363,6 +365,7 @@ def crearEventoDatos():
     RUTA NOMBRERUTA, TE PERMITE
     """
     # * inputs con la información de la creación de un nuevo evento.
+    nombreEvento = request.form['nombreEvento']
     lugar = request.form['lugar']
     fecha = request.form['fecha']
     capacidad = request.form['capacidad']
@@ -375,18 +378,16 @@ def crearEventoDatos():
         collectionEventos, session['usuario'], session['password'], session['usuario_id'])
 
     # * Metodo CrearClase, que perimtirá registrar el evento en el usuario
-    (listaDatos, mensaje) = objReciclaje.crearEvento(
-        lugar, fecha, capacidad, labor, descripcion, donacion)
+    (listaDatos, mensaje) = objReciclaje.crearEvento(nombreEvento,
+                                                     lugar, fecha, capacidad, labor, descripcion, donacion)
 
     print(crearEvento)
 
-    #*Fecha y hora actual
+    # *Fecha y hora actual
     # x = datetime.datetime.now()
 
     # anyo = fecha.split('-')[0]
     # anyoActual = x.strftime("%Y")
-
-
 
     # if int(anyo) < int(anyoActual):
 

@@ -39,9 +39,9 @@ class Reciclaje():
 
 
     #* Método Donaciones
-    def crearEvento(self, lugar, fecha, capacidad, labor, descripcion, donacion):
+    def crearEvento(self, nombreEvento, lugar, fecha, capacidad, labor, descripcion, donacion):
 
-        listaDatos = [lugar, fecha, capacidad, labor, descripcion, donacion]
+        listaDatos = [nombreEvento, lugar, fecha, capacidad, labor, descripcion, donacion]
 
         print(fecha.split('-'))
 
@@ -66,6 +66,7 @@ class Reciclaje():
         #* Diccionario donde está la información para agregar el evento
         diccEvento = {
             'usuario_id': self.usuario_id,
+            'nombreEvento': nombreEvento,
             'lugar': lugar,
             'fecha': f'{anyo}-{mes}-{dia}',
             'horario': hora,
@@ -108,7 +109,7 @@ class Reciclaje():
                 return listaDatos, mensaje
 
 
-    def evento(self, lugar, fecha, nombreEvento, labor, donacion):
+    def evento(self, nombreEvento, lugar, fecha, labor, donacion):
 
         
 
@@ -117,6 +118,7 @@ class Reciclaje():
         algunoEstaVacio = []
 
         diccEvento = {
+            'nombreEvento': nombreEvento,
             'lugar': lugar,
             'fecha': fecha,
             'nombreEvento': nombreEvento, 
@@ -168,6 +170,7 @@ class Reciclaje():
                 # #* Lista donde agregamos las querys con la información
                 listaQuery = []
 
+                #* query de mongoDB con la lista datosNoVacios.
                 buscarEvento = self.collection.find(datosNoVacios)
 
                 print('Antes de que se haga el filtro, es decir, no se aplico el condicional IF')
