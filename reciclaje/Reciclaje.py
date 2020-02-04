@@ -170,7 +170,7 @@ class Reciclaje():
 
                 buscarEvento = self.collection.find(datosNoVacios)
 
-                print('Antes de que se haga el filtro')
+                print('Antes de que se haga el filtro, es decir, no se aplico el condicional IF')
 
                 # #??????????????????????????????????????????????????????????????????
 
@@ -182,22 +182,22 @@ class Reciclaje():
 
                 if listaQuery != []:
 
-                    print('Despues de que se aplique el filtro')
+                    print('Despues de que se aplique el filtro, es decir, si aparece este mensaje es que estas dentro del IF')
 
                     print(listaQuery[0])
 
-                    mensaje = 'Busqueda completa, es decir, todos los campos/inputs se les fue introducido valores'
+                    mensaje = 'Busqueda completa, es decir, algún campo fue introducto o todos los campos/inputs se les fue introducido valores'
 
                     print(mensaje)
 
                     return listaQuery, mensaje
-                
-
 
 
                 # if llave == 'lugar' and llave == 
 
             else:
+
+                #* Agregamos los datos vacios que el usuario no ingreso en la busqueda a la lista.
 
                 algunoEstaVacio = [i]
 
@@ -209,7 +209,7 @@ class Reciclaje():
 
             print(noValor)
 
-        return [diccEvento], 'Haciendo pruebas'
+        return [diccEvento], 'Haciendo pruebas, no se introdujo ningún campo'
             # return listaQuery
         
         # else:
