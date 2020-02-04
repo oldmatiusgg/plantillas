@@ -383,6 +383,46 @@ def crearEventoDatos():
 
     print(crearEvento)
 
+    #??????????????????????????????????????????????????????????
+    #* Agregar el ID del evento al propio documento del evento, esto para poder hacer el proceso de donación
+    #* PORQUE AQUÍ, y no en un metodo?. porque la variable "(listaDatos, mensaje)" ya ha creado el documento del nuevo evento
+    #* por lo cual al escribir codigo aquñi, se supone que ya se registro el evento en mongoDB
+
+    #* variables que contiene el contenido de una fecha
+    anyo = fecha.split('-')[0]
+    mes = fecha.split('-')[1]
+    dia = fecha.split('-')[2].split('T')[0]
+    hora = fecha.split('-')[2].split('T')[1]
+
+
+    # * Diccionario que nos ayudará con los querys de MongoDB
+    diccEventoBusqueda = {
+        # 'usuario_id': session['usuario'],
+        'nombreEvento': nombreEvento,
+        'lugar': lugar,
+        'fecha': f'{anyo}-{mes}-{dia}',
+        # 'horario': hora,
+        'capacidad': capacidad,
+        'labor': labor
+
+        }
+
+    buscarIdEvento = collectionEventos.find(diccEventoBusqueda)
+
+    # * lista donde agregaremos el ID del evento
+    listaIDEvento = []
+
+    print('Tenemos la lista que nos ayudará a sacar el ID del evento')
+    # print(list(buscarIdEvento))
+
+    for i in list(buscarIdEvento):
+
+        listaIDEvento.append(str(i['_id']))
+
+        agregarIDEvento = collectionEventos.update_one(diccEventoBusqueda, {'$set': {'evento_id': listaIDEvento[0]}})
+
+        print('Se ha agregado el Id del evento recien creado, a este mismo para ayudar al proceso de la donación')
+
     # *Fecha y hora actual
     # x = datetime.datetime.now()
 

@@ -130,6 +130,15 @@
 
         <h1>donacion : {{ i['donacion'] }}</h1>
 
+        <!--Boton donación-->
+
+        <form action="{{ url_for('eventos') }}" method="post">
+
+            <button type="submit">
+                <input type="hidden" name="donacion" value="{{  }}">
+            </button>
+        </form>
+
     {% endfor %}
 
     <br>

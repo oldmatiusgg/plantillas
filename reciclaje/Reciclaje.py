@@ -1,9 +1,9 @@
 
-#* RANDOM
+# * RANDOM
 import random
-#* OS
+# * OS
 import os
-#*Date
+# *Date
 # from datetime import date, time, datetime
 import datetime
 
@@ -15,33 +15,31 @@ class Reciclaje():
     """
 
     def __init__(self, collection, usuario, contrasenya, usuario_id):
-
         """
         CONTRUCTOR DE LA CLASE NOMBRECLASE
         """
 
         self.inicio = 0
 
-        #* collection mongoDB
+        # * collection mongoDB
         self.collection = collection
 
-        #* usuario de SESSION
+        # * usuario de SESSION
         self.usuario = usuario
 
-        #* contraseña de SESSION
+        # * contraseña de SESSION
         self.contrasenya = contrasenya
 
-        #* id Usuario de MongoDB
+        # * id Usuario de MongoDB
         self.usuario_id = usuario_id
-
 
     # def perfil(self):
 
-
-    #* Método Donaciones
+    # * Método Donaciones
     def crearEvento(self, nombreEvento, lugar, fecha, capacidad, labor, descripcion, donacion):
 
-        listaDatos = [nombreEvento, lugar, fecha, capacidad, labor, descripcion, donacion]
+        listaDatos = [nombreEvento, lugar, fecha,
+                      capacidad, labor, descripcion, donacion]
 
         print(fecha.split('-'))
 
@@ -60,10 +58,10 @@ class Reciclaje():
         diaActual = x.strftime("%d")
         horaActual = x.strftime("%X")
 
-        #* Mensaje que se enviará
+        # * Mensaje que se enviará
         mensaje = ''
 
-        #* Diccionario donde está la información para agregar el evento
+        # * Diccionario donde está la información para agregar el evento
         diccEvento = {
             'usuario_id': self.usuario_id,
             'nombreEvento': nombreEvento,
@@ -76,19 +74,18 @@ class Reciclaje():
             'donacion': int(donacion)
         }
 
-
         # print(anyoActual)
 
-        print(f'anyoActual: {anyoActual} y mesActual: {mesActual} y diaActual: {diaActual} y horaActual: {horaActual}')
+        print(
+            f'anyoActual: {anyoActual} y mesActual: {mesActual} y diaActual: {diaActual} y horaActual: {horaActual}')
 
         if int(anyo) < int(anyoActual):
 
             mensaje = 'Tienes que poner una fecha actual'
 
             return listaDatos, mensaje
-        
-        else:
 
+        else:
 
             if donacion != '':
 
@@ -108,12 +105,9 @@ class Reciclaje():
 
                 return listaDatos, mensaje
 
-
     def evento(self, nombreEvento, lugar, fecha, labor, donacion):
 
-        
-
-        #???????????????????????
+        # ???????????????????????
 
         algunoEstaVacio = []
 
@@ -121,15 +115,15 @@ class Reciclaje():
             'nombreEvento': nombreEvento,
             'lugar': lugar,
             'fecha': fecha,
-            'nombreEvento': nombreEvento, 
-            'labor': labor, 
+            'nombreEvento': nombreEvento,
+            'labor': labor,
             'donacion': donacion
         }
 
-        #* diccionario que me ayudará a realizar las querys de los datos no vacios.
+        # * diccionario que me ayudará a realizar las querys de los datos no vacios.
         datosNoVacios = {}
 
-        #* diccionario que me ayudará a realizar las querys de los datosvacios.
+        # * diccionario que me ayudará a realizar las querys de los datosvacios.
         datosVacios = {}
 
         for llave, i in diccEvento.items():
@@ -149,11 +143,12 @@ class Reciclaje():
                     mes = fecha.split('-')[1]
                     dia = fecha.split('-')[2]
 
-                    datosNoVacios['fecha']: f'{anyo}-{mes}-{dia}' 
+                    datosNoVacios['fecha']: f'{anyo}-{mes}-{dia}'
 
                 else:
 
-                    print('No se encuentra la llave FECHA en el diccionario de los datosNoVacios')
+                    print(
+                        'No se encuentra la llave FECHA en el diccionario de los datosNoVacios')
 
                 if 'donacion' in datosNoVacios:
 
@@ -161,7 +156,8 @@ class Reciclaje():
 
                 else:
 
-                    print('No se encuentra la llave DONACIÓN en el diccionario de los datosNoVacios')
+                    print(
+                        'No se encuentra la llave DONACIÓN en el diccionario de los datosNoVacios')
 
                 print(datosNoVacios)
 
@@ -170,10 +166,11 @@ class Reciclaje():
                 # #* Lista donde agregamos las querys con la información
                 listaQuery = []
 
-                #* query de mongoDB con la lista datosNoVacios.
+                # * query de mongoDB con la lista datosNoVacios.
                 buscarEvento = self.collection.find(datosNoVacios)
 
-                print('Antes de que se haga el filtro, es decir, no se aplico el condicional IF')
+                print(
+                    'Antes de que se haga el filtro, es decir, no se aplico el condicional IF')
 
                 # #??????????????????????????????????????????????????????????????????
 
@@ -185,7 +182,8 @@ class Reciclaje():
 
                 if listaQuery != []:
 
-                    print('Despues de que se aplique el filtro, es decir, si aparece este mensaje es que estas dentro del IF')
+                    print(
+                        'Despues de que se aplique el filtro, es decir, si aparece este mensaje es que estas dentro del IF')
 
                     print(listaQuery[0])
 
@@ -195,17 +193,16 @@ class Reciclaje():
 
                     return listaQuery, mensaje
 
-
-                # if llave == 'lugar' and llave == 
+                # if llave == 'lugar' and llave ==
 
             else:
 
-                #* Agregamos los datos vacios que el usuario no ingreso en la busqueda a la lista.
+                # * Agregamos los datos vacios que el usuario no ingreso en la busqueda a la lista.
 
                 algunoEstaVacio = [i]
 
-        #???????????????????????????????????????
-    
+        # ???????????????????????????????????????
+
         for noValor in algunoEstaVacio:
 
             print('Los i"s que están vacios')
@@ -213,16 +210,15 @@ class Reciclaje():
             print(noValor)
 
         return [diccEvento], 'Haciendo pruebas, no se introdujo ningún campo'
-            # return listaQuery
-        
+        # return listaQuery
+
         # else:
 
         #     listaQuery.clear()
 
         # return diccEvento
 
-        #????????????????????????????
-
+        # ????????????????????????????
 
         # anyo = fecha.split('-')[0]
         #         mes = fecha.split('-')[1]
@@ -267,5 +263,3 @@ class Reciclaje():
         #         print(mensaje)
 
         #         return listaQuery, mensaje
-
-        
