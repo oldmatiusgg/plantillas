@@ -527,7 +527,7 @@ def donaciones():
 
     # # * Aquí se agrega la PRE-estructura de los diccionarios embebidos que contendrán a los usuarios que han donado al evento.
     agregarListaDonacion = collectionEventos.update_one(
-        {'evento_id': session['evento_id']}, {'$set': {'lasdonaciones': {f'{usuario}': {'donante_id': usuario_id, 'cantidad': 0}}}})
+        {'evento_id': session['evento_id']}, {'$set': {'lasdonaciones': {usuario: {'cantidad': 0, 'donante_id': f'{usuario_id}'}}}})
 
     print('Se ha agregado la PRE-estructura de donación.')
 

@@ -297,7 +297,7 @@ class Reciclaje():
                 # * Agregar donación al documento del evento, donde se agregará el usuario, el usuario_id y la cantidad que dono
 
                 agregarDonacion = self.collection.update_one(
-                    {'evento_id': evento_id}, {'$set': {'lasdonaciones': {f'{self.usuario}': {'cantidad': listaConEvento[0]['lasdonaciones'][f'{self.usuario}']['cantidad'] + donacion}}}})
+                    {'evento_id': evento_id}, {'$set': {'lasdonaciones': {f'{self.usuario}': {'cantidad': listaConEvento[0]['lasdonaciones'][f'{self.usuario}']['cantidad'] + donacion, 'donante_id': f'{self.usuario_id}'}}}})
 
 
                 print('Se ha agregado la donación')
@@ -327,7 +327,7 @@ class Reciclaje():
                 # * Agregar donación al documento del evento, donde se agregará el usuario, el usuario_id y la cantidad que dono
 
                 agregarDonacion = self.collection.update_one(
-                    {'evento_id': evento_id}, {'$set': {'lasdonaciones': {f'{self.usuario}': {'cantidad': listaConEvento[0]['lasdonaciones'][f'{self.usuario}']['cantidad'] + donacion}}}})
+                    {'evento_id': evento_id}, {'$set': {'lasdonaciones': {f'{self.usuario}': {'cantidad': listaConEvento[0]['lasdonaciones'][f'{self.usuario}']['cantidad'] + donacion, 'donante_id': f'{self.usuario_id}'}}}})
 
                 print('Se ha agregado la donación')
                 
