@@ -132,10 +132,13 @@
 
         <!--Boton donación-->
 
-        <form action="{{ url_for('eventos') }}" method="post">
+        <form action="{{ url_for('donaciones') }}" method="GET">
 
             <button type="submit">
-                <input type="hidden" name="donacion" value="{{  }}">
+
+                DONAR A ESTE EVENTO
+                <input type="hidden" name="evento_id" value="{{ i['evento_id'] }}">
+
             </button>
         </form>
 

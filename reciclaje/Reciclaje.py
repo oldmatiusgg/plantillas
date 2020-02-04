@@ -263,3 +263,56 @@ class Reciclaje():
         #         print(mensaje)
 
         #         return listaQuery, mensaje
+
+
+    def Donacion(self, donacion, evento_id):
+
+        # Llamamos con la query al evento usando el id del evento para tenerlo inmediatamente
+        evento = self.collection.find({'evento_id': evento_id})
+
+        print(donacion)
+
+        #* lista donde se estará el resultado de la query, es decir el documento de mongoDB donde esta el Evento.
+        listaConEvento = []
+
+        # print(list(evento))
+
+        # return listaConEvento
+
+        for i in list(evento):
+
+            listaConEvento.append(i)
+
+        if listaConEvento != []:
+
+            print(f'LISTACONEVENTO: {listaConEvento}')
+
+            print(f'DONACION: {donacion}')
+
+            if listaConEvento[0]['donacion'] == 'infinito':
+
+                mensaje = 'El atributo del documento del evento, llamada donacion, es tipo INFINITO, por lo cual no hay problema al momento de donar'
+
+                aviso = 'Ya has donado, vuelve a donar si quieres'
+
+                return mensaje, aviso
+
+            else:
+
+                print('El atributo del documento del evento, llamada donacion no es tipo INFINITO')
+
+            if donacion > listaConEvento[0]['donacion']:
+
+                mensaje = f'La cantidad ingresada de donación es superior a la permita, ya que el usuario que creo el evento, puso un limite de:' + str({listaConEvento[0]['donacion']})
+
+                aviso = 'Ingresa una donación menor a esa cantidad, para poder donar'
+
+                return mensaje, aviso
+
+            else:
+
+                mensaje = f'La cantidad donada fue: {donacion}'
+
+                aviso = 'Ya has donado, vuelve a donar si quieres'
+                
+                return mensaje, aviso

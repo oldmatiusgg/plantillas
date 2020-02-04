@@ -105,6 +105,11 @@ def homeDatos():
 
         session.clear()
 
+    # if request.method == 'GET':
+
+    #     print('Se ha limpiado la variable de session')
+    #     session['evento_id'] = ''
+
     return render_template('home.html', usuario_existe=False, logo='logo')
 
 # ************************************************
@@ -383,17 +388,16 @@ def crearEventoDatos():
 
     print(crearEvento)
 
-    #??????????????????????????????????????????????????????????
-    #* Agregar el ID del evento al propio documento del evento, esto para poder hacer el proceso de donación
-    #* PORQUE AQUÍ, y no en un metodo?. porque la variable "(listaDatos, mensaje)" ya ha creado el documento del nuevo evento
-    #* por lo cual al escribir codigo aquñi, se supone que ya se registro el evento en mongoDB
+    # ??????????????????????????????????????????????????????????
+    # * Agregar el ID del evento al propio documento del evento, esto para poder hacer el proceso de donación
+    # * PORQUE AQUÍ, y no en un metodo?. porque la variable "(listaDatos, mensaje)" ya ha creado el documento del nuevo evento
+    # * por lo cual al escribir codigo aquñi, se supone que ya se registro el evento en mongoDB
 
-    #* variables que contiene el contenido de una fecha
+    # * variables que contiene el contenido de una fecha
     anyo = fecha.split('-')[0]
     mes = fecha.split('-')[1]
     dia = fecha.split('-')[2].split('T')[0]
     hora = fecha.split('-')[2].split('T')[1]
-
 
     # * Diccionario que nos ayudará con los querys de MongoDB
     diccEventoBusqueda = {
@@ -405,7 +409,7 @@ def crearEventoDatos():
         'capacidad': capacidad,
         'labor': labor
 
-        }
+    }
 
     buscarIdEvento = collectionEventos.find(diccEventoBusqueda)
 
@@ -419,9 +423,12 @@ def crearEventoDatos():
 
         listaIDEvento.append(str(i['_id']))
 
-        agregarIDEvento = collectionEventos.update_one(diccEventoBusqueda, {'$set': {'evento_id': listaIDEvento[0]}})
+        agregarIDEvento = collectionEventos.update_one(
+            diccEventoBusqueda, {'$set': {'evento_id': listaIDEvento[0]}})
 
         print('Se ha agregado el Id del evento recien creado, a este mismo para ayudar al proceso de la donación')
+
+    # ?????????????????????????????????????????????????????????????????????????????????????????
 
     # *Fecha y hora actual
     # x = datetime.datetime.now()
@@ -496,13 +503,21 @@ def denunciaDatos():
 # * Si necesitas más rutas, copia y pega estas dos plantillas de rutas
 
 
-@app.route('/donaciones')
+@app.route('/donaciones', methods=['GET'])
 def donaciones():
     """
     RUTA DONACIONES, TE PERMITE
     """
+    # * input hidden con el evento_id pero ya desde el formulario de donaciones.html
+    evento_id = request.args.get('evento_id')
 
-    return render_template('donaciones.html')
+    print(f'este es el evento_id en la ruta donacion con method=get: {evento_id}')
+
+    #* Agregar el ID del evento a SESSION
+    session['evento_id'] = evento_id
+
+
+    return render_template('donaciones.html', evento_id=evento_id)
 
 
 # ******************************************
@@ -514,7 +529,21 @@ def donacionesDatos():
     RUTA DONACIONES, TE PERMITE
     """
 
-    return render_template('donaciones.html')
+    # * evento_id que agregamos en la SESSION
+    evento_id = session['evento_id']
+    # * cantidad de donacion ingresada
+    donacion = request.form['donacion']
+
+    print(evento_id)
+
+    # * objeto de Clase Reciclaje
+    objReciclaje = Reciclaje(
+        collectionEventos, session['usuario'], session['password'], session['usuario_id'])
+
+    #* metodo para agregar donación
+    (mensaje, aviso) = objReciclaje.Donacion(int(donacion), evento_id)
+
+    return render_template('donaciones.html', mensaje=mensaje, aviso=aviso)
 
 # ******************************************
 
