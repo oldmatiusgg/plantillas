@@ -511,11 +511,27 @@ def donaciones():
     # * input hidden con el evento_id pero ya desde el formulario de donaciones.html
     evento_id = request.args.get('evento_id')
 
-    print(f'este es el evento_id en la ruta donacion con method=get: {evento_id}')
+    print(
+        f'este es el evento_id en la ruta donacion con method=get: {evento_id}')
 
-    #* Agregar el ID del evento a SESSION
+    # * Agregar el ID del evento a SESSION
     session['evento_id'] = evento_id
 
+    # * nombre de usuario para agregarle a la PRE-estructura del documento de evento cuando el usuario vaya a donar.
+    usuario = session['usuario']
+
+    # * usuario ID para agregarle a la PRE-estructura del documento de evento cuando el usuario vaya a donar.
+    usuario_id = session['usuario_id']
+
+    # ???????????????????????????????????????????????????????
+
+    # # * Aquí se agrega la PRE-estructura de los diccionarios embebidos que contendrán a los usuarios que han donado al evento.
+    agregarListaDonacion = collectionEventos.update_one(
+        {'evento_id': session['evento_id']}, {'$set': {'lasdonaciones': {f'{usuario}': {'donante_id': usuario_id, 'cantidad': 0}}}})
+
+    print('Se ha agregado la PRE-estructura de donación.')
+
+    # ???????????????????????????????????????????????????????
 
     return render_template('donaciones.html', evento_id=evento_id)
 
@@ -540,7 +556,7 @@ def donacionesDatos():
     objReciclaje = Reciclaje(
         collectionEventos, session['usuario'], session['password'], session['usuario_id'])
 
-    #* metodo para agregar donación
+    # * metodo para agregar donación
     (mensaje, aviso) = objReciclaje.Donacion(int(donacion), evento_id)
 
     return render_template('donaciones.html', mensaje=mensaje, aviso=aviso)

@@ -264,7 +264,6 @@ class Reciclaje():
 
         #         return listaQuery, mensaje
 
-
     def Donacion(self, donacion, evento_id):
 
         # Llamamos con la query al evento usando el id del evento para tenerlo inmediatamente
@@ -272,7 +271,7 @@ class Reciclaje():
 
         print(donacion)
 
-        #* lista donde se estará el resultado de la query, es decir el documento de mongoDB donde esta el Evento.
+        # * lista donde se estará el resultado de la query, es decir el documento de mongoDB donde esta el Evento.
         listaConEvento = []
 
         # print(list(evento))
@@ -295,15 +294,25 @@ class Reciclaje():
 
                 aviso = 'Ya has donado, vuelve a donar si quieres'
 
+                # * Agregar donación al documento del evento, donde se agregará el usuario, el usuario_id y la cantidad que dono
+
+                agregarDonacion = self.collection.update_one(
+                    {'evento_id': evento_id}, {'$set': {'lasdonaciones': {f'{self.usuario}': {'cantidad': listaConEvento[0]['lasdonaciones'][f'{self.usuario}']['cantidad'] + donacion}}}})
+
+
+                print('Se ha agregado la donación')
+                
                 return mensaje, aviso
 
             else:
 
-                print('El atributo del documento del evento, llamada donacion no es tipo INFINITO')
+                print(
+                    'El atributo del documento del evento, llamada donacion no es tipo INFINITO')
 
             if donacion > listaConEvento[0]['donacion']:
 
-                mensaje = f'La cantidad ingresada de donación es superior a la permita, ya que el usuario que creo el evento, puso un limite de:' + str({listaConEvento[0]['donacion']})
+                mensaje = f'La cantidad ingresada de donación es superior a la permita, ya que el usuario que creo el evento, puso un limite de:' + \
+                    str(listaConEvento[0]['donacion'])
 
                 aviso = 'Ingresa una donación menor a esa cantidad, para poder donar'
 
@@ -314,5 +323,12 @@ class Reciclaje():
                 mensaje = f'La cantidad donada fue: {donacion}'
 
                 aviso = 'Ya has donado, vuelve a donar si quieres'
+
+                # * Agregar donación al documento del evento, donde se agregará el usuario, el usuario_id y la cantidad que dono
+
+                agregarDonacion = self.collection.update_one(
+                    {'evento_id': evento_id}, {'$set': {'lasdonaciones': {f'{self.usuario}': {'cantidad': listaConEvento[0]['lasdonaciones'][f'{self.usuario}']['cantidad'] + donacion}}}})
+
+                print('Se ha agregado la donación')
                 
                 return mensaje, aviso
