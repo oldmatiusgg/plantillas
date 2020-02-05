@@ -4,14 +4,19 @@ version: "3"
 # Contenedores= Servicios
 services:
     # Carpeta donde esta la imagen
-    app:
+    app: 
         build: .
         image: appflask
         container_name: contenedorflask
         ports: 
-            - "5500:5000"
-        volumes: 
-            - ./src:/app
+            #* Cuando coloques el "docker-compose up" y nos salga la URl del navegador, tenemos que usar el puerto externo
+            #* es decir, en este caso el 7700
+            - "7700:5000"
+        #* Si el ordenador no permite crear los volumenes por tema de permisos, pon en comentarios los "volumes"
+        # volumes: 
+        #     - ./src:/app
 
     # basededatos:
     #     image: mongo
+
+    #* NOTA: SI QUIERES VER LOS PASOS MÁS DETALLADOS SOBRE LOS COMANDOS VE A LOS APUNTES DEL DIA ENERO 05/2020.

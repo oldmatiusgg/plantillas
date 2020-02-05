@@ -9,6 +9,8 @@ import csv
 from pymongo import MongoClient
 #* Libreria Documentación
 import doctest
+#* necesitamos esta libreria que nos ayudará con el if main.
+import os
 
 # *DATOS BASE DE DATOS EN LA NUBE
 '''
@@ -234,5 +236,8 @@ if __name__ == "__main__":
     """
     MAIN, PARA INICIAR MAIN.PY
     """
-
-    app.run('0.0.0.0', '5000', debug=True)
+    #* FORMA MAIN CON DOCKER
+    # app.run('0.0.0.0', '5000', debug=True)
+    #* Como funciona?R/: Basicamente estamos definiendo el puerto local, 
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)

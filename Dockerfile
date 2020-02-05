@@ -18,4 +18,5 @@ WORKDIR /app
 EXPOSE 5000
 
 # Ahora como en la consola de CMD, daremos instrucciones que serían ejecutar, python3 y main.py
-CMD [ "python3", "main.py" ]
+CMD ["python3", "main.py"]
+
