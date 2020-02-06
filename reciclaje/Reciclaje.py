@@ -332,3 +332,26 @@ class Reciclaje():
                 print('Se ha agregado la donación')
                 
                 return mensaje, aviso
+
+    def mostrarEventos(self):
+
+        eventos = self.collection.find({'usuario_id': self.usuario_id})
+
+        #* Lista donde agregamos los resultados de la query de MONGODB
+        listaEventos = []
+
+        for i in list(eventos):
+
+            listaEventos.append(i)
+
+        if listaEventos != []:
+
+            activo = True
+
+            return listaEventos, activo
+
+        else:
+
+            activo = False
+
+            return listaEventos, activo

@@ -227,7 +227,16 @@ def perfil():
     RUTA NOMBRERUTA, TE PERMITE
     """
 
-    return render_template('perfil.html')
+    # * Crear objeto y usar el metodo MostrarEventos() para mostrar los eventos
+    # * objeto de Clase Reciclaje
+    objReciclaje = Reciclaje(
+        collectionEventos, session['usuario'], session['password'], session['usuario_id'])
+
+    # * Metodo MostrarEventos().
+
+    (mostrarEventos, activo) = objReciclaje.mostrarEventos()
+
+    return render_template('perfil.html', mostrarEventos=mostrarEventos, activo=activo)
 
 
 # ******************************************

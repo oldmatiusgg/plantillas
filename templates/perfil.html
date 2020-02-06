@@ -12,6 +12,7 @@
 
 <div class="contenedor">
 
+    <!--??????????????????????????????????????????????????????-->
 
     <section>
 
@@ -71,6 +72,63 @@
         <h2>Localidad/ciudad: </h2>
 
         
+
+    </section>
+
+    <!--??????????????????????????????????????????????????????-->
+
+    <section>
+
+        {% if activo == True %}
+
+        <h1>MIS EVENTOS: </h1>
+
+        {%for i in mostrarEventos %}
+
+        <br>
+
+        <h1>{{ i }}</h1>
+
+        <h1>Lugar : {{ i['lugar'] }}</h1>
+
+        <br>
+
+        <h1>fecha : {{ i['fecha'] }}</h1>
+
+        <br>
+
+        <h1>horario : {{ i['horario'] }}</h1>
+
+        <br>
+
+        <h1>Capacidad de personas para el evento : {{ i['capacidad'] }}</h1>
+
+        <br>
+
+        <h1>labor : {{ i['labor'] }}</h1>
+
+        <br>
+
+        <h1>descripcion : {{ i['descripcion'] }}</h1>
+
+        <br>
+
+        <h1>donacion : {{ i['donacion'] }}</h1>
+
+        <h1><-------------------------------------------------------------------------></h1>
+
+        <br>
+
+        {% endfor %}
+
+
+
+        {% else %}
+
+        <h1>AÚN NO TIENES NINGÚN EVENTO</h1>
+
+        {% endif %}
+
 
     </section>
 
