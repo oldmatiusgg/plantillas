@@ -3,3 +3,10 @@ pymongo
 dnspython
 autopep8
 pep8
+
+#* Scraping
+requests
+bs4
+lxml
+#* Crawling
+selenium
